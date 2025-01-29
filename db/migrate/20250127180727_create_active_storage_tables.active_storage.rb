@@ -46,3 +46,4 @@ class CreateActiveStorageTables < ActiveRecord::Migration[5.2]
       [primary_key_type, foreign_key_type]
     end
 end
+

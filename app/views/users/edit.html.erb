@@ -1,13 +1,40 @@
-<h1>User info</h1>
-<%= form_for(@user) do |f| %>
-<%= render 'books/error', model: @user %>
-  <div class="user-name">Name</div>
-    <%= f.text_field :name %>
-  <div class="user-edit-image">Image</div>
-    <%= f.attachment_field :profile_image %>
-  <div class="form-body">Introduction</div>
-    <%= f.text_area :introduction %><br>
-  <div class="upload">
-    <%= f.submit " Update User" %>
+<main>
+  <p id = "notice"></p> <!-- 空白 -->
+
+  <div class = "container">
+    <div class = "row">
+      <div class = "col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+        <h2>User info</h2>
+
+        <%= form_with model: @user do |u| %>
+
+          <% if @user.errors.any? %>
+            <h3><%= @user.errors.count %>error prohibited this obj from being saved:</h3>
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          <% end %>
+
+          <div>
+            <label>Name</label>
+            <%= u.text_field :name, autofocus: true %>
+          </div>
+
+          <div>
+            <label>Image</label>
+            <%= u.file_field :profile_image, accept: "image/*" %>
+          </div>
+
+          <div>
+            <label>Introduction</label>
+            <%= u.text_area :introduction %>
+          </div>
+
+          <%= u.submit "Update User", class: "btn btn-secondary" %>
+        <% end %>
+      </div>
+    </div>
   </div>
-<% end %>
+</main>
